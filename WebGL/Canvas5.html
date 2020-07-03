@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+
+        body 
+        {
+            margin: 0;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+
+    <script src="three.js"></script>
+    <script src="FBXLoader.js"></script>
+
+</head>
+
+<body>
+    <br>
+    <input type="text" id="filePath" name="url" value="Models/idmetal.fbx"><br><br>
+    <button href="#" onClick="generate(document.getElementById('filePath').value)">Render</button>
+
+    <script>
+
+        var scene = new THREE.Scene();
+
+        function onSuccess(geometry)
+        {
+            scene.add(geometry);
+        }
+
+        function onProgress(url, itemsLoaded, itemsTotal) {
+            //alert('Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
+        }
+
+        function onError(e) {
+            alert("loader failed with error status: " + e.target.status + ", text: " + e.target.statusText);
+        }
+
+        function generate(url)
+        {
+            var renderer = new THREE.WebGLRenderer();
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(500, 500);
+            var loader = new THREE.FBXLoader();
+            var fieldOfView = 40,
+                aspectRatio = 16 / 9,
+                near = 0.1,
+                far = 1000;
+            var camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, near, far);
+
+            loader.load(url, onSuccess, onProgress, onError);
+            renderer.render(scene, camera);
+        }
+
+    </script>
+
+</body>
+</html>

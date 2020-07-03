@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="Cango3D-10v01.js"></script>
+    <script type="text/javascript">
+        function draw() {
+            var canvas = document.getElementById('canvasID');
+            if (canvas.getContext) {
+                var ctx = canvas.getContext('2d');
+
+                
+                ctx.fillRect(25, 25, 100, 100);
+                ctx.clearRect(45, 45, 60, 60);
+                ctx.strokeRect(50, 50, 50, 50);
+            }
+        }
+
+
+        function drawDemo(cvsID) {
+            const g = new Cango3D(cvsID),                
+                stick = new Path3D(["M", 0, 0, 0, "C", 0, 33, 0, -5, 66, 0, -15, 100, 0],
+                    { y: -100, strokeColor: "sienna", lineWidth: 3 }),
+                plate = new Panel3D(shapeDefs.circle(50),
+                    { xRot: -75, fillColor: "yellow", backColor: "yellow" }),
+                plateNstick = new Group3D(stick, plate);
+            let angle = 0;
+
+            function turnPlate() {
+                angle += 20;
+                if (angle > 360)
+                    angle -= 360;
+
+                plateNstick.rotateY(angle);  // apply matrix to Group3D
+                g.render(plateNstick);
+            }
+
+            g.setWorldCoords3D(-75, -120, 150);
+            g.setLightSource(0, 500, 200);
+
+            setInterval(turnPlate, 50)        // keep doing this forever
+        }
+
+
+        
+    </script>
+
+</head>
+<body>
+    <p><button href="#" onClick="draw();">Click Me</button></p>
+    <canvas id="canvasID" width="500" height="300"></canvas>
+
+    <!--<script>drawDemo(canvasID);</script>-->
+
+</body>
+</html >
