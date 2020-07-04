@@ -69,14 +69,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Canvas3.html" />
     <Content Include="Canvas2.html" />
-    <Content Include="Canvas.html" />
     <Content Include="Canvas5.html" />
     <Content Include="dat.gui.min.js" />
     <Content Include="FBXLoader.js" />
     <Content Include="Global.asax" />
     <Content Include="OrbitControls.js" />
+    <Content Include="script.js" />
     <Content Include="stats.min.js" />
     <Content Include="stats.module.js" />
     <Content Include="three.js" />
@@ -95,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Models\idmetal.fbx" />
+    <Content Include="Models\xsi_man_skinning.fbx" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="scripts\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

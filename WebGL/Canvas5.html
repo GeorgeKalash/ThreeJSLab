@@ -5,8 +5,7 @@
     <title></title>
     <style>
 
-        body 
-        {
+        body {
             margin: 0;
         }
 
@@ -17,45 +16,66 @@
 
     <script src="three.js"></script>
     <script src="FBXLoader.js"></script>
+    <script src="script.js"></script>
 
 </head>
 
 <body>
+
+    <div id="container"></div>
+
+    <div id="info">
+        <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a>
+    </div>
+
     <br>
+
     <input type="text" id="filePath" name="url" value="Models/idmetal.fbx"><br><br>
-    <button href="#" onClick="generate(document.getElementById('filePath').value)">Render</button>
+    <input type="text" id="cameraZ" name="url" value="5"><br><br>
+    <button href="#" onClick="init(document.getElementById('filePath').value, document.getElementById('cameraZ').value)">Init</button>
+    <button href="#" onClick="generate()">Render</button>
+    <button href="#" onClick="init2()">Init2</button>
 
     <script>
 
-        var scene = new THREE.Scene();
+        // var camera, scene, renderer, container, loader;
 
-        function onSuccess(geometry)
-        {
+        function init2() {
+            const objs = main();
+        }
+
+        function init(url, elevation) {
+            // alert('loading ' + url + ' at elevation ' + elevation);
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 100);
+            camera.position.z = elevation;
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container = document.getElementById('container');
+            container.appendChild(renderer.domElement);
+            document.body.appendChild(renderer.domElement);
+            loader = new THREE.FBXLoader();
+            loader.load(url, onSuccess, onProgress, onError);
+            alert('loaded loaded fbx file');
+        }
+
+        function onSuccess(geometry) {
             scene.add(geometry);
+            alert('geometry added to the scene');
         }
 
         function onProgress(url, itemsLoaded, itemsTotal) {
-            //alert('Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
+            // alert('Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
         }
 
         function onError(e) {
             alert("loader failed with error status: " + e.target.status + ", text: " + e.target.statusText);
         }
 
-        function generate(url)
-        {
-            var renderer = new THREE.WebGLRenderer();
-            renderer.setPixelRatio(window.devicePixelRatio);
-            renderer.setSize(500, 500);
-            var loader = new THREE.FBXLoader();
-            var fieldOfView = 40,
-                aspectRatio = 16 / 9,
-                near = 0.1,
-                far = 1000;
-            var camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, near, far);
-
-            loader.load(url, onSuccess, onProgress, onError);
+        function generate() {
             renderer.render(scene, camera);
+            alert('rendered');
         }
 
     </script>

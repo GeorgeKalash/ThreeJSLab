@@ -25,10 +25,10 @@
             <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a>
         </div>
     <p></p>
-    <p><label>Width</label><input type="text" id="Width" value="0" /></p>
-    <p><label>height</label><input type="text" id="height" value="0" /></p>
-    <p><label>depth</label><input type="text" id="depth" value="0" /></p>
-    <p><label>angle</label><input type="text" id="angle" value="0" /></p>
+    <p><label>Width</label><input type="text" id="Width" value="2" /></p>
+    <p><label>height</label><input type="text" id="height" value="2" /></p>
+    <p><label>depth</label><input type="text" id="depth" value="2" /></p>
+    <p><label>angle</label><input type="text" id="angle" value="20" /></p>
     <button href="#" onClick="init();">Initialize</button>
     <button href="#" onClick="draw();">Click Me</button>
     <input type="button" value="Reset" onclick="window.location.reload();" />
@@ -37,20 +37,18 @@
     <script>
         var camera, scene, renderer,container;
         var cube;
-    function init() {
-            container = document.getElementById( 'container' );
+        function init()
+        {
             scene = new THREE.Scene();
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);//new THREE.PerspectiveCamera(document.getElementById("length").value, document.getElementById("width").value, 0.1, 1000);
             renderer = new THREE.WebGLRenderer({ antialias: true } );
             renderer.setPixelRatio( window.devicePixelRatio );
-			renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container = document.getElementById('container');
             container.appendChild(renderer.domElement);
-
-
-
             document.body.appendChild(renderer.domElement);
-            var geometry = new THREE.BoxBufferGeometry(document.getElementById("Width").value, document.getElementById("height").value, document.getElementById("depth").value, document.getElementById("Width").value);
-        
+
+            var geometry = new THREE.BoxBufferGeometry(document.getElementById("Width").value, document.getElementById("height").value, document.getElementById("depth").value, document.getElementById("Width").value);      
             var material = new THREE.MeshBasicMaterial({ color: 0xfefefe, wireframe: true, opacity: 0.5 });
             cube = new THREE.Mesh(geometry, material);
             scene.add(cube);
