@@ -14,19 +14,15 @@
         }
     </style>
 
-    <script src="three.js"></script>
-    <script src="FBXLoader.js"></script>
-    <script src="script.js"></script>
+    <script src="scripts/three.js"></script>
+    <script src="scripts/FBXLoader.js"></script>
+    <script src="scripts/script.js"></script>
 
 </head>
 
 <body>
 
     <div id="container"></div>
-
-    <div id="info">
-        <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a>
-    </div>
 
     <br>
 
@@ -38,9 +34,10 @@
 
     <script>
 
-        // var camera, scene, renderer, container, loader;
+        var camera, scene, renderer, container, loader;
 
-        function init2() {
+        function init2()
+        {
             const objs = main();
         }
 
@@ -49,33 +46,42 @@
             scene = new THREE.Scene();
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 100);
             camera.position.z = elevation;
-            renderer = new THREE.WebGLRenderer({ antialias: true });
+
+            renderer = new THREE.WebGLRenderer();
             renderer.setPixelRatio(window.devicePixelRatio);
             renderer.setSize(window.innerWidth, window.innerHeight);
+
             container = document.getElementById('container');
-            container.appendChild(renderer.domElement);
-            document.body.appendChild(renderer.domElement);
+
             loader = new THREE.FBXLoader();
             loader.load(url, onSuccess, onProgress, onError);
-            alert('loaded loaded fbx file');
+            alert('loader successfully loaded fbx file');
+            // renderer.render(scene, camera);
+            // alert('rendered');
         }
 
-        function onSuccess(geometry) {
+        function onSuccess(geometry)
+        {
             scene.add(geometry);
             alert('geometry added to the scene');
         }
 
-        function onProgress(url, itemsLoaded, itemsTotal) {
+        function onProgress(url, itemsLoaded, itemsTotal)
+        {
             // alert('Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
         }
 
-        function onError(e) {
+        function onError(e)
+        {
             alert("loader failed with error status: " + e.target.status + ", text: " + e.target.statusText);
         }
 
-        function generate() {
+        function generate()
+        {
             renderer.render(scene, camera);
-            alert('rendered');
+            container.appendChild(renderer.domElement);
+            //document.body.appendChild(renderer.domElement);
+            //alert('rendered');
         }
 
     </script>
