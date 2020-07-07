@@ -93,7 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Models\idmetal.fbx" />
-    <Content Include="Models\xsi_man_skinning.fbx" />
+    <Content Include="Models\skin-man.fbx" />
     <Content Include="Models\cube.fbx" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">

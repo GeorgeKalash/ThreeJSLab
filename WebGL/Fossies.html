@@ -14,131 +14,73 @@
 
 <body>
 
-    <script type="module">
+    <br>
 
-        var container, stats, controls;
-        var camera, scene, loader, renderer, light;
+    <input type="text" id="filePath" name="url" value="Models/x.fbx"><br><br>
+    <input type="text" id="cameraZ" name="url" value="50"><br><br>
 
-        var clock = new THREE.Clock();
+    <button href="#" onClick="init()">init</button>
+    <button href="#" onClick="render()">render</button>
 
-        var mixer;
+    <br>
 
-        init();
-        animate();
+    <div id="container"></div>
 
-        function onProgress(url, itemsLoaded, itemsTotal)
-        {
-           //alert('Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
-        }
+    <script>
 
-        function onError(e)
-        {
-            alert("loader failed with error status: " + e.target.status + ", text: " + e.target.statusText);
-        }
+        var scene, loader, rendered, camera, container;
 
         function init()
         {
-            container = document.createElement('div');
-            document.body.appendChild(container);
-
-            camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
-            camera.position.set(100, 200, 300);
-
+            var filePath = document.getElementById('filePath').value;
             scene = new THREE.Scene();
-            scene.background = new THREE.Color(0xa0a0a0);
-            scene.fog = new THREE.Fog(0xa0a0a0, 200, 1000);
+            loader = new THREE.FBXLoader(manager);
 
-            light = new THREE.HemisphereLight(0xffffff, 0x444444);
-            light.position.set(0, 200, 0);
-            scene.add(light);
+            var manager = new THREE.LoadingManager();
 
-            light = new THREE.DirectionalLight(0xffffff);
-            light.position.set(0, 200, 100);
-            light.castShadow = true;
-            light.shadow.camera.top = 180;
-            light.shadow.camera.bottom = - 100;
-            light.shadow.camera.left = - 120;
-            light.shadow.camera.right = 120;
-            scene.add(light);
-
-            // scene.add( new CameraHelper( light.shadow.camera ) );
-
-            // ground
-            var mesh = new THREE.Mesh(new THREE.PlaneBufferGeometry(2000, 2000), new THREE.MeshPhongMaterial({ color: 0x999999, depthWrite: false }));
-            mesh.rotation.x = - Math.PI / 2;
-            mesh.receiveShadow = true;
-            scene.add(mesh);
-
-            var grid = new THREE.GridHelper(2000, 20, 0x000000, 0x000000);
-            grid.material.opacity = 0.2;
-            grid.material.transparent = true;
-            scene.add(grid);
-            //alert('scene added grid');
-            // model
-            loader = new THREE.FBXLoader();
-            alert('loader object created');
-
-            loader.load('Models/cube.fbx', function (object)
+            manager.onStart = function (url, itemsLoaded, itemsTotal)
             {
-                alert('success started');
-                //mixer = new THREE.AnimationMixer(object);
+                console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
+            };
+            manager.onProgress = function (item, loaded, total)
+            {
+                console.log(item, loaded, total);
+            };
+            manager.onLoad = function ()
+            {
+                console.log('Loading Complete!')
+            }
+            manager.onError = function (url) {
+                console.log('There was an error loading: ' + url);
+            }
 
-                //var action = mixer.clipAction(object.animations[0]);
+            var onProgress = function (xhr) {
+                if (xhr.lengthComputable) {
+                    var percentComplete = xhr.loaded / xhr.total * 100;
+                    console.log(Math.round(percentComplete, 2) + '% downloaded');
+                }
+            };
 
-                //action.play();
-                //alert('action.play() passed');
-                //object.traverse(function (child) {
+            var onError = function (xhr) { console.log(xhr) };
 
-                //if (child.isMesh)
-                //{
-                //    child.castShadow = true;
-                //    child.receiveShadow = true;
-                //}
-
-                //});
-
+            loader.load(filePath, function (object) {
                 scene.add(object);
-                alert('scene added');
+                console.log('object added to the scene');
             }, onProgress, onError);
+        }
 
-            renderer = new THREE.WebGLRenderer({ antialias: true });
-            renderer.setPixelRatio(window.devicePixelRatio);
+        function render()
+        {
+            var elevation = document.getElementById('cameraZ').value;
+
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 100);
+            camera.position.z = elevation;
+            renderer = new THREE.WebGLRenderer();
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.shadowMap.enabled = true;
+            renderer.render(scene, camera);
+            console.log('render done');
+            container = document.getElementById('container');
             container.appendChild(renderer.domElement);
-
-            controls = new OrbitControls(camera, renderer.domElement);
-            controls.target.set(0, 100, 0);
-            controls.update();
-
-            window.addEventListener('resize', onWindowResize, false);
-
-            // stats
-            stats = new Stats();
-            container.appendChild(stats.dom);
-
-        }
-
-        function onWindowResize()
-        {
-
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-
-            renderer.setSize(window.innerWidth, window.innerHeight);
-
-        }
-
-        //
-
-        function animate()
-        {
-
-            requestAnimationFrame(animate);
-            var delta = clock.getDelta();
-            if (mixer) mixer.update(delta);
-                renderer.render(scene, camera);
-            stats.update();
         }
 
     </script>

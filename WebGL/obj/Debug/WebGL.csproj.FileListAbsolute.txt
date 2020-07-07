@@ -1,13 +1,6 @@
 C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\bin\WebGL.dll.config
 C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\bin\WebGL.dll
 C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\bin\WebGL.pdb
-C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\obj\Debug\WebGL.csprojAssemblyReference.cache
-C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\obj\Debug\WebGL.csproj.CoreCompileInputs.cache
-C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\obj\Debug\WebGL.csproj.CopyComplete
-C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\obj\Debug\WebGL.dll
-C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\obj\Debug\WebGL.pdb
 C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\bin\roslyn\csc.exe
 C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\bin\roslyn\csc.exe.config
 C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\bin\roslyn\csc.rsp
@@ -34,3 +27,9 @@ C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\bin\roslyn\vbc.exe.config
 C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\bin\roslyn\vbc.rsp
 C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\bin\roslyn\VBCSCompiler.exe
 C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\bin\roslyn\VBCSCompiler.exe.config
+C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\obj\Debug\WebGL.csproj.CoreCompileInputs.cache
+C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\obj\Debug\WebGL.csproj.CopyComplete
+C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\obj\Debug\WebGL.dll
+C:\SourceCode\Custom\IDMetal\ThreeJSLab\WebGL\obj\Debug\WebGL.pdb
