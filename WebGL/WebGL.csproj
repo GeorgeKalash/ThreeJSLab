@@ -69,7 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Fossies.html" />
+    <Content Include="test.html" />
     <Content Include="testPage.html" />
     <Content Include="scripts\dat.gui.min.js" />
     <Content Include="scripts\FBXLoader.js" />

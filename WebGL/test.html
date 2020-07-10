@@ -16,10 +16,10 @@
 
     <br>
 
-    <input type="text" id="filePath" name="url" value="Models/x.fbx"><br><br>
+    <input type="text" id="filePath" name="url" value="Models/skin-man.fbx"><br><br>
     <input type="text" id="cameraZ" name="url" value="50"><br><br>
 
-    <button href="#" onClick="init()">init</button>
+    <button href="#" onClick="init()">init..</button>
     <button href="#" onClick="render()">render</button>
 
     <br>
@@ -32,6 +32,7 @@
 
         function init()
         {
+            console.log('init');
             var filePath = document.getElementById('filePath').value;
             scene = new THREE.Scene();
             loader = new THREE.FBXLoader(manager);
@@ -61,10 +62,20 @@
                 }
             };
 
-            var onError = function (xhr) { console.log(xhr) };
+            var onError = function (xhr)
+            {
+                console.log('error loader.load: ' + xhr);
+            };
 
-            loader.load(filePath, function (object) {
+            console.log('request loader.load ' + filePath);
+            loader.load(filePath, function (object)
+            {
+                console.log('adding scene');
                 scene.add(object);
+                var geometry = new THREE.BoxGeometry(10 * Math.random(), 10 * Math.random(), 10 * Math.random());
+                var material = new THREE.MeshNormalMaterial();
+                var cube = new THREE.Mesh(geometry, material);
+                scene.add(cube);
                 console.log('object added to the scene');
             }, onProgress, onError);
         }
@@ -72,15 +83,16 @@
         function render()
         {
             var elevation = document.getElementById('cameraZ').value;
-
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 100);
             camera.position.z = elevation;
             renderer = new THREE.WebGLRenderer();
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.render(scene, camera);
             console.log('render done');
-            container = document.getElementById('container');
-            container.appendChild(renderer.domElement);
+            //container = document.getElementById('container');
+            document.body.appendChild(renderer.domElement);
+            //container.appendChild(renderer.domElement);
+
+            renderer.render(scene, camera);
         }
 
     </script>
