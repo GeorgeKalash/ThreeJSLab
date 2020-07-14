@@ -69,21 +69,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="test.html" />
-    <Content Include="testPage.html" />
-    <Content Include="scripts\dat.gui.min.js" />
+    <Content Include="cube-fbx.html" />
     <Content Include="scripts\FBXLoader.js" />
     <Content Include="Global.asax" />
-    <Content Include="scripts\OrbitControls.js" />
-    <Content Include="scripts\script.js" />
-    <Content Include="scripts\stats.min.js" />
-    <Content Include="scripts\stats.module.js" />
     <Content Include="scripts\three.js" />
-    <Content Include="scripts\three.min.js" />
-    <Content Include="scripts\three.module.js" />
-    <Content Include="scripts\VertexNormalsHelper.js" />
     <Content Include="Web.config" />
-    <Content Include="webgl_geometry_normals.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.asax.cs">
@@ -92,9 +82,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\idmetal.fbx" />
-    <Content Include="Models\skin-man.fbx" />
-    <Content Include="Models\cube.fbx" />
+    <Content Include="Models\cube1-ascii.fbx" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
