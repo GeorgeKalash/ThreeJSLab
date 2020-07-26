@@ -16,10 +16,22 @@
 
     <br>
 
+    <label for="drawingFile">drawing file:</label>
     <input type="text" id="filePath" name="url" value="Models/cube1-ascii.fbx"><br><br>
-    <input type="text" id="cameraZ" name="url" value="100"><br><br>
 
-    <button href="#" onClick="init()">init..</button>
+    <label for="cameraX">camera X:</label>
+    <input type="text" id="cameraX" name="camera X" value="50"><br><br>
+    <label for="cameraX">camera Y:</label>
+    <input type="text" id="cameraY" name="camera Y" value="30"><br><br>
+    <label for="cameraX">camera Z:</label>
+    <input type="text" id="cameraZ" name="camera Z" value="100"><br><br>
+
+    <label for="rotateX">rotate X:</label>
+    <input type="text" id="rotateX" name="rotate X" value="50"><br><br>
+    <label for="rotateY">rotate Y:</label>
+    <input type="text" id="rotateY" name="rotate Y" value="30"><br><br>
+
+    <button href="#" onClick="init()">init</button>
     <button href="#" onClick="render()">render</button>
     <button href="#" onClick="display()">display</button>
     <br>
@@ -66,7 +78,19 @@
 
             console.log('request loader.load ' + filePath);
             loader.load(filePath, function (object) {
-                console.log('adding scene');
+                object.rotateOnAxis(new THREE.Vector3(1, 0, 0), document.getElementById('rotateX').value)
+                object.rotateOnAxis(new THREE.Vector3(0, 1, 0), document.getElementById('rotateY').value)
+                console.log('object rotated');
+
+                var light = new THREE.PointLight(0x00ff00, 1, 100);
+                light.position.set(50, 50, 50);
+
+                var directionalLight = new THREE.DirectionalLight(0x00ff00, 0.5);
+                scene.add(directionalLight);
+
+                //scene.add(light);
+                console.log('light added to the scene');
+
                 scene.add(object);
                 console.log('object added to the scene');
             }, onProgress, onError);
@@ -76,11 +100,12 @@
         {
             renderer = new THREE.WebGLRenderer();
             renderer.setSize(window.innerWidth, window.innerHeight);
-            console.log('render done');
-            var elevation = document.getElementById('cameraZ').value;
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 200);
-            camera.position.z = elevation;
+            camera.position.x = document.getElementById('cameraX').value;
+            camera.position.y = document.getElementById('cameraY').value;
+            camera.position.z = document.getElementById('cameraZ').value;
             renderer.render(scene, camera);
+            console.log('render done');
         }
 
         function display()
