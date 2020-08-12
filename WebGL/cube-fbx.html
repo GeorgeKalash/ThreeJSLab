@@ -32,7 +32,7 @@
 
         function init()
         {
-            console.log('init');
+            //console.log('init');
             var filePath = document.getElementById('filePath').value;
             container = document.getElementById('container');
             scene = new THREE.Scene();
@@ -64,7 +64,7 @@
                 console.log('error loader.load: ' + xhr);
             };
 
-            console.log('request loader.load ' + filePath);
+            //console.log('request loader.load ' + filePath);
             loader.load(filePath, function (object) {
                 console.log('adding scene');
                 scene.add(object);
@@ -76,7 +76,7 @@
         {
             renderer = new THREE.WebGLRenderer();
             renderer.setSize(window.innerWidth, window.innerHeight);
-            console.log('render done');
+            //console.log('render done');
             var elevation = document.getElementById('cameraZ').value;
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 200);
             camera.position.z = elevation;
